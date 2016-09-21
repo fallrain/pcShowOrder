@@ -51,21 +51,29 @@
     showOrderPicUpload: urlHead + '/showorder/showOrderList',//上传图片保存
   };
 
-  var showOrderObj = {};
+  var showOrderObj = {
+    currentPage: 1
+  };
   window.showOrderObj = showOrderObj;//对外释放的对象
   showOrderObj.showOrderList = function(currentPage, pageSize){
     /*查询晒单列表*/
     var url = urlObj.showOrderList;
     var params = {
-      currentPage: currentPage || 1,
+      currentPage: showOrderObj.currentPage || 1,
       pageSize: pageSize || 9//默认为9个
     };
     Common.sendFormData(url, function(data){
       if(data.isSuccess){
+        if(!data.data){
+          showOrderObj.currentPage--;
+          return;
+        }
         var orderListHtml = genOrderListHtml(data.data.resultList);
         var orderListPar = $('#scrollDiv');
         //添加进去
         orderListPar.html(orderListHtml);
+        $('.js-m-imgbox').off('click', showMyOrder)
+        $('.js-m-imgbox').click(showMyOrder)
       }else{
         alert(data.resultMsg);
       }
@@ -73,11 +81,12 @@
   };
   var genOrderListHtml = function(data){
     /*组合晒单的html*/
+    showOrderObj.ordsData = data;
     var len = data.length;
     var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
       var ord = data[i];
-      var img = $('<a class="m-imgbox"><img src="' + ord.showPics.split(',')[0] + '"/></a>');
+      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
       var zan = $('<a class="z-zan" data-showOrderId="' + ord.idsUserId + '"></a>');
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
@@ -316,17 +325,61 @@
     }, params);
   }
 
+  function showMyOrder(){
+    /*点击图片展示订单*/
+
+    var $this = $(this);
+    var num = $this.attr('data-index');
+    var ordData = showOrderObj.ordsData[num];
+    //slider_cont 大图 <li class="silder_panel clearfix"><a href="#"><img src="images/2012101623050497.jpg"/></a></li>
+    //smImg 小缩略图 <li><a href="#"><i></i><img src="images/img-xcsl01.jpg"/></a></li>
+    //myOrdId ID
+    //myOrdDec 晒单内容
+    //myOrdPrdDec 商品说明
+    var showPicsAy = ordData.showPics.split(',');
+    var picsLen = showPicsAy.length;
+    var bigPicLiAy = [];
+    var smPicLiAy = [];
+    for(var i = 0; i < picsLen; i++){
+      var pic = showPicsAy[i];
+      var picSrc = urlHead + pic;
+      bigPicLiAy.push('<li class="silder_panel clearfix"><a href="#"><img src="' + picSrc + '"/></a></li>');
+      smPicLiAy.push('<li><a href="#"><i></i><img src="' + picSrc + '"/></a></li>');
+    }
+    $('#slider_cont').html(bigPicLiAy.join(''));//添加进大图
+    $('#smImg').html(smPicLiAy.join(''));//添加进小图
+    $('#myOrdId').html(ordData.productID);//产品ID
+    $('#myOrdDec').html(ordData.showContent);
+    $('#myOrdPrdDec').html(ordData.productDesc);
+
+    $("#js-tc").addClass("z-blo");//显示弹层
+  }
+
+  function jumpPage(){
+    var $this = $(this);
+    var type = $this.attr('data-jumps');
+    if(type == 'pre'){
+      if(--showOrderObj.currentPage < 1){
+        showOrderObj.currentPage = 1;
+      }
+    }else{
+      ++showOrderObj.currentPage;
+    }
+    showOrderObj.showOrderList();
+  }
+
   function bindLis(){
     $('#scrollDiv').off('click');
     $('#scrollDiv').on('click', clickZan);
     $('#z-up').on('click', smtOrd);
     bindUpImg();//绑定上传图片事件
+    $('.js-jump-page').on('click', jumpPage);
   }
 
   (function init(){
     /*初始化页面*/
     showOederCheck();//晒单服务
     bindLis();//绑定事件
-    //showOrderObj.showOrderList();//查询列表页
+    showOrderObj.showOrderList();//查询列表页
   })();
 })();
