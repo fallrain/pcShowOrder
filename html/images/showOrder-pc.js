@@ -329,8 +329,13 @@
     /*点击图片展示订单*/
 
     var $this = $(this);
+    //去掉点赞的样式
+    $('.z-rightzanbox').prop('disabled', false);
+    $('.z-rightzanbox').removeClass('z-crt');
+
     var num = $this.attr('data-index');
     var ordData = showOrderObj.ordsData[num];
+    showOrderObj.curMyOrdData = ordData;
     //slider_cont 大图 <li class="silder_panel clearfix"><a href="#"><img src="images/2012101623050497.jpg"/></a></li>
     //smImg 小缩略图 <li><a href="#"><i></i><img src="images/img-xcsl01.jpg"/></a></li>
     //myOrdId ID
@@ -356,6 +361,7 @@
   }
 
   function jumpPage(){
+    /*翻页*/
     var $this = $(this);
     var type = $this.attr('data-jumps');
     if(type == 'pre'){
@@ -368,12 +374,31 @@
     showOrderObj.showOrderList();
   }
 
+  function myOrdClickZan(e){
+    /*点赞事件*/
+    var $this = $(this);
+    $this.prop('disabled', true);
+    var url = urlObj.saveAssist;
+    var params = {
+      showOrderId: showOrderObj.curMyOrdData.idsUserId
+    };
+    Common.sendFormData(url, function(data){
+      if(data.isSuccess){
+        $this.addClass('z-crt');
+      }else{
+        $this.prop('disabled', false);
+        alert(data.resultMsg);
+      }
+    }, params);
+  }
+
   function bindLis(){
     $('#scrollDiv').off('click');
     $('#scrollDiv').on('click', clickZan);
     $('#z-up').on('click', smtOrd);
     bindUpImg();//绑定上传图片事件
     $('.js-jump-page').on('click', jumpPage);
+    $('.z-rightzanbox').click(myOrdClickZan);
   }
 
   (function init(){
