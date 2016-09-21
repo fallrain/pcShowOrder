@@ -73,8 +73,8 @@
           <!--<div class="m-xlbox">-->
           <div class="div_scroll">
             <div id="un_modelnoinfo2">
-              <ul id="">
-                <li>小厨师 空气炸锅 AF-F001</li>
+              <ul id="beShowOrd">
+                <li data-orderId="DDSDSD" data-productID="11" data-productDesc="22">小厨师 空气炸锅 AF-F001</li>
                 <li>小厨师 空气炸锅 AF-F003</li>
                 <li>小厨师 空气炸锅 AF-F0012</li>
                 <li>小厨师 空气炸锅 AF-F001</li>
@@ -94,7 +94,7 @@
           $('.div_scroll').scroll_absolute({arrows: false})
         });</script>
         <!-- 下拉条 结束 -->
-        <div class="m-txt">订单号：123456790</div>
+        <div class="m-txt">订单号：<span id="saveOrdFromOrdNum">123456790</span></div>
       </div>
       <div class="m-tit">内容</div>
       <div class="m-iptbox">
@@ -197,207 +197,207 @@
     <!-- 右边 -->
     <div class="m-rightpart">
       <div id="scrollDiv">
-        <ul>
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd01.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan" data-showOrderId></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+        <!-- <ul>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd01.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan" data-showOrderId></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd02.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan z-crt"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd02.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan z-crt"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd03.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd03.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd04.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd04.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd05.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan z-crt"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd05.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan z-crt"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd06.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd06.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd07.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd07.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd08.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan z-crt"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd08.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan z-crt"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd09.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd09.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd01.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd01.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd02.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan z-crt"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd02.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan z-crt"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd03.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd03.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd07.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd07.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd08.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan z-crt"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd08.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan z-crt"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd09.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd09.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd06.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd06.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd05.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan z-crt"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd05.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan z-crt"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
-          <li>
-            <a class="m-imgbox"><img src="images/img-sd04.jpg" alt=""/></a>
-            <div class="m-contbox">
-              <div class="m-leftname">ID：滴漏式咖啡机</div>
-              <div class="m-rightzan">
-                <a class="z-zan"></a>
-                <div class="m-nubmer">51</div>
-              </div>
-            </div>
-          </li>
+           <li>
+             <a class="m-imgbox"><img src="images/img-sd04.jpg" alt=""/></a>
+             <div class="m-contbox">
+               <div class="m-leftname">ID：滴漏式咖啡机</div>
+               <div class="m-rightzan">
+                 <a class="z-zan"></a>
+                 <div class="m-nubmer">51</div>
+               </div>
+             </div>
+           </li>
 
 
-        </ul>
+         </ul>-->
       </div>
       <div class="m-btnbox">
         <a class="z-uppage" id="btn2"></a>
@@ -444,9 +444,14 @@ $(function(){
   });
 
   s_select.click(function(){
+    var $this = $(this);
     var s_text = $(this).text();
     var s_title_2 = $("#js-name");
     s_title_2.text(s_text).removeClass("span_aa");
+    var ordId = $this.attr('data-orderId');
+    s_title_2.attr('data-productID', $this.attr('data-productID'));
+    s_title_2.attr('data-productDesc', $this.attr('data-productDesc'));
+    $('#saveOrdFromOrdNum').html(ordId);
     $('.div_scroll').hide();
   });
 

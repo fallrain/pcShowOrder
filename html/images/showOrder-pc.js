@@ -51,44 +51,6 @@
     showOrderPicUpload: urlHead + '/showorder/showOrderList',//上传图片保存
   };
 
-
-  function showOederCheck(){
-    var beShowurl = urlObj.isShowOrder;
-    Common.sendFormData(beShowurl, function(data){
-      if(data.isSuccess){
-        var isshow = data.data.isshow;
-        if(isshow == 0){//有数据
-          $('#js-nosdt').addClass("z-blo");
-        }
-        if(isshow == 11){
-          $('#js-sd').addClass("z-blo");
-          var order = data.data.showOrder;
-          var showOrderPar = $('#js-sd');
-          var proName = $('#js-sdname');
-          proName.html(order.productDesc);
-          var proNum = $('#js-sdOrderId');
-          proNum.html(order.orderId);
-          var proCont = $('#js-sdcont');
-          proCont.html(order.showContent);
-          var proClickzan = $('#js-dznum');
-          proClickzan.html(order.assistcount);
-
-          var showOrderImgPar = $('#js-sdpics');
-          var showPics = order.showPics.split(',');
-          var picLen = showPics.length;
-          for(var i = 0; i < picLen; i++){
-            var pic = showPics[i];
-            var img = $('<img src="' + pic + '"/>');
-            var imgPar = $('<div class="m-listimg"></div>');
-            imgPar.append(img);
-          }
-          showOrderImgPar.html(imgPar);
-        }
-      }
-    });
-  }
-
-
   var showOrderObj = {};
   window.showOrderObj = showOrderObj;//对外释放的对象
   showOrderObj.showOrderList = function(currentPage, pageSize){
@@ -132,6 +94,66 @@
     }
     return ul;
   };
+
+  function fillInMyOrd(data){
+    /*我的晒单信息*/
+    $('#js-nosd').removeClass("z-blo");
+    $('#js-sd').addClass("z-blo");
+    var order = data.data.showOrder;
+    var showOrderPar = $('#js-sd');
+    var proName = $('#js-sdname');
+    proName.html(order.productDesc);
+    var proNum = $('#js-sdOrderId');
+    proNum.html(order.orderId);
+    var proCont = $('#js-sdcont');
+    proCont.html(order.showContent);
+    var proClickzan = $('#js-dznum');
+    proClickzan.html(order.assistcount);
+
+    var showOrderImgPar = $('#js-sdpics');
+    var showPics = order.showPics.split(',');
+    var picLen = showPics.length;
+    for(var i = 0; i < picLen; i++){
+      var pic = showPics[i];
+      var img = $('<img src="' + pic + '"/>');
+      var imgPar = $('<div class="m-listimg"></div>');
+      imgPar.append(img);
+    }
+    showOrderImgPar.html(imgPar);
+  }
+
+  function toShowOrder(data){
+    /*填写信息晒单*/
+    $('#js-sd').removeClass("z-blo");
+    $('#js-nosd').addClass("z-blo");
+    var ordList = data.data.orderList;
+    //<li>小厨师 空气炸锅 AF-F001</li>
+    var ordListLen = ordList.length;
+    var liAy = [];
+    for(var i = 0; i < ordListLen; i++){
+      var ord = ordList[i];
+      var li = '<li data-productID="' + ord.goods_id + '" data-orderId="' + ord.order_id + '" data-productDesc="' + ord.showContent + '">';
+      li += ord.GOODS_NAME + '</li>';
+      liAy.push(li);
+    }
+    $('#beShowOrd').html(liAy.join(''));
+  }
+
+  function showOederCheck(){
+    /*判断是否晒单来判断*/
+    var beShowurl = urlObj.isShowOrder;
+    Common.sendFormData(beShowurl, function(data){
+      if(data.isSuccess){
+        var isshow = data.data.isshow;
+        if(isshow == 0){//有数据
+          $('#js-nosdt').addClass("z-blo");
+        }
+        if(isshow == 1){
+          fillInMyOrd(data);
+        }
+      }
+    });
+  }
 
   var upImg = function(data){
     /*上传图片的html*/
@@ -186,7 +208,7 @@
 
   function smtOrd(){
     /*提交晒单*/
-    var showContentStr=$('#showContent').val();
+    var showContentStr = $('#showContent').val();
     checkNumOfContent(showContentStr);
   }
 
