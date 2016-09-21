@@ -63,7 +63,7 @@
     </div>
     <div class="m-cutline"></div>
     <!-- 左边 -->
-    <div id="js-nosd" class="m-leftpart">
+    <div id="js-nosd" class="m-leftpart" style="display: block;">
       <div class="m-tit">选择晒单商品</div>
       <div class="m-iptbox">
         <div class="m-hint">*</div>
@@ -73,7 +73,7 @@
           <!--<div class="m-xlbox">-->
           <div class="div_scroll">
             <div id="un_modelnoinfo2">
-              <ul>
+              <ul id="">
                 <li>小厨师 空气炸锅 AF-F001</li>
                 <li>小厨师 空气炸锅 AF-F003</li>
                 <li>小厨师 空气炸锅 AF-F0012</li>
@@ -99,8 +99,8 @@
       <div class="m-tit">内容</div>
       <div class="m-iptbox">
         <div class="m-hint">*</div>
-        <textarea class="u-taa"></textarea>
-        <div class="m-txt02">输入晒单文字不得少于10个字多于100个字</div>
+        <textarea class="u-taa" id="showContent" maxlength="100"></textarea>
+        <div class="m-txt02" id="showContentTip">输入晒单文字不得少于10个字多于100个字</div>
       </div>
       <div class="m-iptbox">
         <div class="m-hint">*</div>
@@ -121,7 +121,7 @@
         <li>
           <div class="m-imgbox"></div>
         </li>
-        <li><a class="z-up"></a></li>
+        <li><a class="z-up" id="z-up"></a></li>
       </ul>
 
       <!-- 晒单提交成功 -->
@@ -161,26 +161,26 @@
       <div class="m-sdtit"><img src="images/img-sdtit.png" alt=""/></div>
       <div class="m-sdbox">
         <div class="m-sdtxt">晒单商品名称：</div>
-        <div class="m-sdrighttxt01">小厨师 空气炸锅 AF-F001</div>
+        <div class="m-sdrighttxt01" id="js-sdname">小厨师 空气炸锅 AF-F001</div>
       </div>
       <div class="m-sdbox">
         <div class="m-sdtxt">我的订单号：</div>
-        <div class="m-sdrighttxt02">1234567890</div>
+        <div class="m-sdrighttxt02" id="js-sdOrderId"></div>
       </div>
       <div class="m-sdbox">
         <div class="m-sdtxt">我的晒单内容：</div>
-        <div class="m-sdrighttxt03">小厨师是海尔集团旗下的健康养生电器品牌，具有海尔智能互联产品的技术优势，秉承海尔研发的制造优势，联合全球武大研发中心对小厨师产品进行研发设计，为倡导健康饮食新概念。
+        <div class="m-sdrighttxt03" id="js-sdcont">
         </div>
       </div>
       <!-- 晒单照片 -->
       <div class="m-sdbox">
         <div class="m-sdtxt">我的晒单照片：</div>
-        <div class="m-imgbox">
-          <div class="m-listimg"><img src="images/img-sdcp01.jpg" alt=""/></div>
-          <div class="m-listimg"><img src="images/img-sdcp02.jpg" alt=""/></div>
-          <div class="m-listimg"><img src="images/img-sdcp03.jpg" alt=""/></div>
-          <div class="m-listimg"><img src="images/img-sdcp04.jpg" alt=""/></div>
-          <div class="m-listimg"><img src="images/img-sdcp05.jpg" alt=""/></div>
+        <div class="m-imgbox" id="js-sdpics">
+          <!-- <div class="m-listimg"><img src="images/img-sdcp01.jpg" alt=""/></div>
+           <div class="m-listimg"><img src="images/img-sdcp02.jpg" alt=""/></div>
+           <div class="m-listimg"><img src="images/img-sdcp03.jpg" alt=""/></div>
+           <div class="m-listimg"><img src="images/img-sdcp04.jpg" alt=""/></div>
+           <div class="m-listimg"><img src="images/img-sdcp05.jpg" alt=""/></div>-->
         </div>
       </div>
       <div class="m-sdnumbox">
@@ -188,7 +188,7 @@
         <div class="m-numberbox">
           <div class="m-numberarea">
             <i></i>
-            <p class="m-number">5000</p>
+            <p class="m-number" id="js-dznum"></p>
           </div>
         </div>
       </div>

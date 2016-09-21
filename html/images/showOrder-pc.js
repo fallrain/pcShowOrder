@@ -42,7 +42,7 @@
       }, options));
     },
   };
-  var urlHead = 'http://eshop.haier.com/';//url头部
+  var urlHead = 'http://123.103.113.66';//url头部
   var urlObj = {
     isShowOrder: urlHead + '/showorder/isShowOrder',//判断用户是否晒单服务
     showOrderList: urlHead + '/showorder/showOrderList',//晒单活动列表页服务
@@ -50,14 +50,53 @@
     saveAssist: urlHead + '/showorder/saveAssist',//晒单点赞服务
     showOrderPicUpload: urlHead + '/showorder/showOrderList',//上传图片保存
   };
+
+
+  function showOederCheck(){
+    var beShowurl = urlObj.isShowOrder;
+    Common.sendFormData(beShowurl, function(data){
+      if(data.isSuccess){
+        var isshow = data.data.isshow;
+        if(isshow == 0){//有数据
+          $('#js-nosdt').addClass("z-blo");
+        }
+        if(isshow == 11){
+          $('#js-sd').addClass("z-blo");
+          var order = data.data.showOrder;
+          var showOrderPar = $('#js-sd');
+          var proName = $('#js-sdname');
+          proName.html(order.productDesc);
+          var proNum = $('#js-sdOrderId');
+          proNum.html(order.orderId);
+          var proCont = $('#js-sdcont');
+          proCont.html(order.showContent);
+          var proClickzan = $('#js-dznum');
+          proClickzan.html(order.assistcount);
+
+          var showOrderImgPar = $('#js-sdpics');
+          var showPics = order.showPics.split(',');
+          var picLen = showPics.length;
+          for(var i = 0; i < picLen; i++){
+            var pic = showPics[i];
+            var img = $('<img src="' + pic + '"/>');
+            var imgPar = $('<div class="m-listimg"></div>');
+            imgPar.append(img);
+          }
+          showOrderImgPar.html(imgPar);
+        }
+      }
+    });
+  }
+
+
   var showOrderObj = {};
   window.showOrderObj = showOrderObj;//对外释放的对象
   showOrderObj.showOrderList = function(currentPage, pageSize){
     /*查询晒单列表*/
     var url = urlObj.showOrderList;
     var params = {
-      currentPage: currentPage,
-      pageSize: !pageSize && 9//默认为9个
+      currentPage: currentPage || 1,
+      pageSize: pageSize || 9//默认为9个
     };
     Common.sendFormData(url, function(data){
       if(data.isSuccess){
@@ -94,6 +133,23 @@
     return ul;
   };
 
+  var upImg = function(data){
+    /*上传图片的html*/
+    var imglen = data.length;
+    var upimgul = $('<ul class="m-upimg"></ul>');
+    for(var i = 0; i < 5; i++){
+      var ord = data[i];
+      var upImg = $('<div class="m-imgbox"><img src=""/></div>');
+      var btnImg = $('<a class="z-add"></a>');
+      var btnSave = $('<a class="z-up"></a>');
+      var li = $('<li></li>');
+      li.append(btnImg);
+      li.append(upImg);
+      li.append(btnSave);
+      upimgul.append(li);
+    }
+  };
+
   function clickZan(e){
     /*点赞事件*/
     var tg = e.target;
@@ -101,6 +157,7 @@
     if(!$tg.hasClass('z-zan')){
       return;
     }
+    $tg.prop('disabled', true);
     var url = urlObj.saveAssist;
     var params = {
       showOrderId: $tg.attr('data-showOrderId')
@@ -111,20 +168,38 @@
         var num = $zanNum.html() * 1;
         $zanNum.html(++num);
       }else{
+        $tg.prop('disabled', false);
         alert(data.resultMsg);
       }
     }, params);
   }
 
+  function checkNumOfContent(str){
+    /*检查字数*/
+    var len = str.split('').length;
+    if(len > 10 && len <= 100){
+      $('#showContentTip').html('输入晒单文字不得少于10个字多于100个字');
+      return true;
+    }
+    $('#showContentTip').html('输入错误！输入晒单文字不得少于10个字多于100个字');
+  }
+
+  function smtOrd(){
+    /*提交晒单*/
+    var showContentStr=$('#showContent').val();
+    checkNumOfContent(showContentStr);
+  }
+
   function bindLis(){
     $('#scrollDiv').off('click');
     $('#scrollDiv').on('click', clickZan);
+    $('#z-up').on('click', smtOrd);
   }
 
   (function init(){
     /*初始化页面*/
+    showOederCheck();//晒单服务
     bindLis();//绑定事件
     showOrderObj.showOrderList();//查询列表页
-
   })();
 })();
