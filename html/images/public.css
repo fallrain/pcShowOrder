@@ -277,13 +277,13 @@ figure {
 }
 
 /* ------ 自定义滚动条 ------ */
-.select_box .m-xlbox {
+.m-leftpart .select_box .m-xlbox {
   width: 362px;
   height: 120px;
   display: none;
 }
 
-.select_box .div_scroll {
+.m-leftpart .select_box .div_scroll {
   width: 362px;
   height: 120px;
   overflow: auto;
@@ -298,16 +298,16 @@ figure {
   box-shadow: 0 5px 5px #e6e6ea;
 }
 
-.select_box .scroll_container {
+.m-leftpart .select_box .scroll_container {
   overflow: hidden;
   position: relative;
 }
 
-.select_box .scroll_absolute {
+.m-leftpart .select_box .scroll_absolute {
   position: absolute;
 }
 
-.select_box .scroll_vertical_bar {
+.m-leftpart .select_box .scroll_vertical_bar {
   position: absolute;
   top: 0;
   right: 0;
@@ -317,19 +317,19 @@ figure {
   padding: 0;
 }
 
-.select_box .scroll_track {
+.m-leftpart .select_box .scroll_track {
   position: relative;
   width: 4px;
   height: 100%;
 }
 
-.select_box .scroll_track .line {
+.m-leftpart .select_box .scroll_track .line {
   background-color: #ebebeb;
   width: 4px;
   height: 100%;
 }
 
-.select_box .scroll_drag {
+.m-leftpart .select_box .scroll_drag {
   position: absolute;
   top: 0;
   left: 0;
@@ -638,14 +638,12 @@ figure {
   display: inline-block;
   float: left;
   margin-left: 10px;
-  overflow: hidden;
-  white-space: nowrap;
   font-size: 14px;
   color: #3e3e3e;
 }
 
 #scrollDiv li .m-contbox .m-rightzan {
-  width: 55px;
+  width: 65px;
   height: 38px;
   display: inline-block;
   float: right;
@@ -1126,6 +1124,20 @@ figure {
   margin: 0 auto;
 }
 
+.m-mobcont .m-in .m-det .m-sdcontbox .m-sdconttxt {
+  height: 200px;
+  line-height: 38px;
+  background-color: #fff;
+  width: 482px;
+  padding: 40px 45px;
+  border: 1px solid #dbdbdb;
+  resize: none;
+  font-size: 24px;
+  color: #6e6e6e;
+  float: left;
+  text-indent: 60px;
+}
+
 .m-mobcont .m-in .m-det .m-sdcontbox .m-tit {
   width: 550px;
   display: inline-block;
@@ -1238,18 +1250,8 @@ figure {
 }
 
 .m-mobcont .m-in .m-ref .select_box ul {
-  width: 572px;
-  position: absolute;
-  top: 72px;
-  left: -1px;
-  border: 1px solid #ddd;
-  border-top: none;
-  display: none;
-  background: #fff;
-  box-shadow: 0 5px 5px #e6e6ea;
-  height: 100px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  width: 100%;
+  display: inline-block;
 }
 
 .m-mobcont .m-in .m-ref .select_box li {
@@ -1264,6 +1266,72 @@ figure {
 .m-mobcont .m-in .m-ref .select_box li:hover {
   background: #309efb;
   color: #fff;
+}
+
+/* ------ 自定义滚动条 ------ */
+.m-mobcont .m-in .m-ref .select_box .m-xlbox {
+  width: 572px;
+  height: 120px;
+  display: none;
+}
+
+.m-mobcont .m-in .m-ref .select_box .div_scroll {
+  width: 572px;
+  height: 120px;
+  overflow: auto;
+  display: none;
+  float: left;
+  position: absolute;
+  top: 72px;
+  left: -1px;
+  border: 1px solid #ddd;
+  border-top: none;
+  background: #fff;
+  box-shadow: 0 5px 5px #e6e6ea;
+}
+
+.m-mobcont .m-in .m-ref .select_box .scroll_container {
+  overflow: hidden;
+  position: relative;
+}
+
+.m-mobcont .m-in .m-ref .select_box .scroll_absolute {
+  position: absolute;
+}
+
+.m-mobcont .m-in .m-ref .select_box .scroll_vertical_bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.m-mobcont .m-in .m-ref .select_box .scroll_track {
+  position: relative;
+  width: 4px;
+  height: 100%;
+}
+
+.m-mobcont .m-in .m-ref .select_box .scroll_track .line {
+  background-color: #ebebeb;
+  width: 4px;
+  height: 100%;
+}
+
+.m-mobcont .m-in .m-ref .select_box .scroll_drag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  background-color: #999;
+  width: 4px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
 }
 
 /* ------ 上传图片 ------ */
