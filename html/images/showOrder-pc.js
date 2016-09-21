@@ -155,13 +155,69 @@
     });
   }
 
+//图片上传绑定事件
+  $.jUploader.setDefaults({
+    cancelable: true, // 可取消上传
+    allowedExtensions: ['jpg', 'png'], // 只允许上传图片
+    messages: {
+      upload: '上传',
+      cancel: '取消',
+      emptyFile: "{file} 为空，请选择一个文件.",
+      //invalidExtension: "{file} 后缀名不合法. 只有 {extensions} 是允许的.",
+      invalidExtension: "只能上传后缀名是 {extensions} 的图片。",
+      onLeave: "文件正在上传，如果你现在离开，上传将会被取消。"
+    }
+  });
+  var smtImgsAy = [];//保存图片的数组
+
+  function bindUpImg(){
+    /*图片都绑定上事件*/
+    smtImgsAy = [];//开始就置空
+    for(var i = 0; i < 5; i++){
+      $.jUploader({
+        button: 'upImg' + i, // 这里设置按钮id
+        action: urlHead + '/showorder/showOrderPicUpload',
+        // 开始上传事件
+        onUpload: function(data){
+        },
+        // 上传完成事件
+        onComplete: function(name, data){
+          if(data.isSuccess){
+            var picSrc = urlHead + data.data; //获取图片路径
+            var btn = this.button;
+            var img = btn.siblings('img');
+            img.prop('src', picSrc);
+            btn.css('display', 'none');
+            img.css('display', 'block');
+            var btnId = btn.prop('id');
+            var btnIdNum = btnId.substr(btnId.length - 1) * 1 + 1;
+            if(btnIdNum > 4){
+              return;
+            }
+            $('#upImg' + btnIdNum).css('display', 'block');
+            smtImgsAy.push(data);
+          }else{
+            alert(data.resultMsg);
+          }
+        },
+        // 系统信息显示（例如后缀名不合法）
+        showMessage: function(message){
+        },
+        // 取消上传事件
+        onCancel: function(fileName){
+        },
+        debug: true
+      });
+    }
+  }
+
   var upImg = function(data){
     /*上传图片的html*/
     var imglen = data.length;
     var upimgul = $('<ul class="m-upimg"></ul>');
     for(var i = 0; i < 5; i++){
       var ord = data[i];
-      var upImg = $('<div class="m-imgbox"><img src=""/></div>');
+      var upImg = $('<div class="js-m-imgbox m-imgbox"><img src=""/></div>');
       var btnImg = $('<a class="z-add"></a>');
       var btnSave = $('<a class="z-up"></a>');
       var li = $('<li></li>');
@@ -206,22 +262,71 @@
     $('#showContentTip').html('输入错误！输入晒单文字不得少于10个字多于100个字');
   }
 
+  function checkShowOrdForm(){
+    /*校验表单*/
+    var showContentStr = $('#showContent').val();
+    var isContentSuc = checkNumOfContent(showContentStr);
+    //检查图片
+    var isImgSuc = true;
+    if(smtImgsAy.length < 1){
+      $('#upImgTip').css('display', 'block');
+      isImgSuc = false;
+    }else{
+      $('#upImgTip').css('display', 'none');
+    }
+    var isOrdIdSuc = !!$('#js-name').html();
+    if(!$('#js-name').html()){
+      $('#ordSltTip').css('display', 'block');
+    }else{
+      $('#ordSltTip').css('display', 'none');
+    }
+    if(isContentSuc && isImgSuc && isOrdIdSuc){
+      return true;
+    }
+  }
+
   function smtOrd(){
     /*提交晒单*/
-    var showContentStr = $('#showContent').val();
-    checkNumOfContent(showContentStr);
+    if(!checkShowOrdForm()){
+      alert('请完整填写表单！');
+      return;
+    }
+    var ordSlt = $('#js-name');
+    var li = '<li data-productID="' + ord.goods_id + '" data-orderId="' + ord.order_id + '" data-productDesc="' + ord.showContent + '">';
+    var productID = ordSlt.attr('data-productID');
+    var productDesc = ordSlt.attr('sata-productDesc');
+    var orderId = ordSlt.attr('data-orderId');
+    var showContent = $('#showContent').val();
+    var showPics = smtImgsAy.join(',');
+    var params = {
+      productID: productID,
+      productDesc: productDesc,
+      orderId: orderId,
+      showContent: showContent,
+      showPics: showPics,
+    };
+    var url = urlObj.saveShowOrder;
+    Common.sendFormData(url, function(data){
+      if(data.isSuccess){
+        $('#js-sdsuc').show();
+      }else{
+        //alert(data.resultMsg);
+        $('#js-sdfail').show();
+      }
+    }, params);
   }
 
   function bindLis(){
     $('#scrollDiv').off('click');
     $('#scrollDiv').on('click', clickZan);
     $('#z-up').on('click', smtOrd);
+    bindUpImg();//绑定上传图片事件
   }
 
   (function init(){
     /*初始化页面*/
     showOederCheck();//晒单服务
     bindLis();//绑定事件
-    showOrderObj.showOrderList();//查询列表页
+    //showOrderObj.showOrderList();//查询列表页
   })();
 })();

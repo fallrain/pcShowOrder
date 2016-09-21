@@ -90,6 +90,7 @@
             </div>
           </div><!--</div>-->
         </div>
+        <div class="vd-error dis-none" id="ordSltTip">请选中一个订单</div>
         <script type="text/javascript">$(function(){
           $('.div_scroll').scroll_absolute({arrows: false})
         });</script>
@@ -108,31 +109,48 @@
       </div>
       <!-- 上传照片 -->
       <ul class="m-upimg">
-        <li><a class="z-add"></a></li>
         <li>
-          <div class="m-imgbox"></div>
+          <div class="m-imgbox">
+            <a class="z-add" id="upImg0"></a>
+            <img class="img100per dis-none" src="">
+          </div>
         </li>
         <li>
-          <div class="m-imgbox"></div>
+          <div class="m-imgbox upImg-none">
+            <a class="z-add" id="upImg1"></a>
+            <img class="img100per dis-none" src="">
+          </div>
         </li>
         <li>
-          <div class="m-imgbox"></div>
+          <div class="m-imgbox upImg-none">
+            <a class="z-add" id="upImg2"></a>
+            <img class="img100per dis-none" src="">
+          </div>
         </li>
         <li>
-          <div class="m-imgbox"></div>
+          <div class="m-imgbox upImg-none">
+            <a class="z-add" id="upImg3"></a>
+            <img class="img100per dis-none" src="">
+          </div>
+        </li>
+        <li>
+          <div class="m-imgbox upImg-none">
+            <a class="z-add" id="upImg4"></a>
+            <img class="img100per dis-none" src="">
+          </div>
         </li>
         <li><a class="z-up" id="z-up"></a></li>
       </ul>
-
+      <div class="vd-error dis-none" id="upImgTip">请上传至少一张图片</div>
       <!-- 晒单提交成功 -->
-      <div id="js-sdsuc" class="m-tcbox z-blo">
+      <div id="js-sdsuc" class="m-tcbox dis-none">
         <div class="m-tcarea">
           <div class="m-sucbox">
             <div class="m-icobox"><img src="images/img-success.png" alt=""/></div>
             <div class="m-sdtxtbox">晒单提交成功</div>
             <div class="m-btnarea">
-              <a href="javascript:;" class="z-btn">取消</a>
-              <a href="javascript:;" class="z-btn">确认</a>
+              <a href="javascript:;" class="z-btn js-close">取消</a>
+              <a href="javascript:;" class="z-btn js-close">确认</a>
             </div>
 
           </div>
@@ -141,13 +159,13 @@
       </div>
 
       <!-- 晒单提交失败 -->
-      <div id="js-sdfail" class="m-tcbox z-blo">
+      <div id="js-sdfail" class="m-tcbox dis-none">
         <div class="m-tcarea">
           <div class="m-sucbox">
             <div class="m-icobox"><img src="images/img-fail.png" alt=""/></div>
             <div class="m-sdtxtbox">晒单提交失败</div>
             <div class="m-btnarea">
-              <a href="javascript:;" class="z-btn">取消</a>
+              <a href="javascript:;" class="z-btn js-close">取消</a>
               <a href="javascript:;" class="z-btn">重新填写</a>
             </div>
 
@@ -197,9 +215,9 @@
     <!-- 右边 -->
     <div class="m-rightpart">
       <div id="scrollDiv">
-        <!-- <ul>
+         <ul>
            <li>
-             <a class="m-imgbox"><img src="images/img-sd01.jpg" alt=""/></a>
+             <a class="m-imgbox js-m-imgbox"><img src="images/img-sd01.jpg" alt=""/></a>
              <div class="m-contbox">
                <div class="m-leftname">ID：滴漏式咖啡机</div>
                <div class="m-rightzan">
@@ -397,7 +415,7 @@
            </li>
 
 
-         </ul>-->
+         </ul>
       </div>
       <div class="m-btnbox">
         <a class="z-uppage" id="btn2"></a>
@@ -415,7 +433,7 @@
   $('#js-closefc').click(function(){
     $(this).parent().removeClass("z-blo");
   })
-  $('.m-imgbox').click(function(){
+  $('.js-m-imgbox').click(function(){
     $("#js-tc").addClass("z-blo");
   })
   $('.z-rightzanbox').click(function(){
@@ -423,12 +441,16 @@
   })
   $('.z-succlo').click(function(){
     $(this).parent().parent().removeClass("z-blo");
+    //直接刷新本页
+    location.reload();
   })
   $('.z-failclo').click(function(){
     $(this).parent().parent().removeClass("z-blo");
   })
-  $('.m-btnarea .z-btn').click(function(){
+  $('.m-btnarea .js-close').click(function(){
     $(this).parent().parent().parent().parent().removeClass("z-blo");
+    //直接刷新本页
+    location.reload();
   })
 </script>
 <script type="text/javascript">//select下拉框js
@@ -527,30 +549,7 @@ $(document).ready(function(){
   $("#scrollDiv").Scroll({line: 3, speed: 500, timer: 3000, up: "btn1", down: "btn2"});
 });
 </script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    /*$.ajax({
-     type: "POST",
-     url: "http://172.16.1.98:8089/showorder/isShowOrder",
-     dataType: "json",
-     //data: "keyword=" + keyWord,
-     success: function(data){
-     var isshow = data.data.isshow;
-
-     if(isshow == 0){//有数据
-     $('#js-nosdt').addClass("z-blo");
-
-
-     //$('.js_searchHasResult ul').html(htmlStr);
-     }
-     if(isshow == 1){
-     $('#js-sd').addClass("z-blo");
-     }
-     }
-     });*/
-  });
-</script>
+<script src="images/jquery.jUploader-1.01.min.js" type="text/javascript"></script>
 <script src="images/showOrder-pc.js" type="text/javascript"></script>
 </html>
 
