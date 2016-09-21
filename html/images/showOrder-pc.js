@@ -42,7 +42,7 @@
       }, options));
     },
   };
-  var urlHead = 'http://172.16.1.98:8089/';//url头部
+  var urlHead = 'http://eshop.haier.com/';//url头部
   var urlObj = {
     isShowOrder: urlHead + '/showorder/isShowOrder',//判断用户是否晒单服务
     showOrderList: urlHead + '/showorder/showOrderList',//晒单活动列表页服务
@@ -62,7 +62,7 @@
     Common.sendFormData(url, function(data){
       if(data.isSuccess){
         var orderListHtml = genOrderListHtml(data.data.resultList);
-        var orderListPar = $('$scrollDiv');
+        var orderListPar = $('#scrollDiv');
         //添加进去
         orderListPar.html(orderListHtml);
       }else{
@@ -72,25 +72,59 @@
   };
   var genOrderListHtml = function(data){
     /*组合晒单的html*/
-    var returnHtml = '';
     var len = data.length;
-  /*  <li>
-    <a class="m-imgbox"><img src="images/img-sd07.jpg" alt=""/></a>
-      <div class="m-contbox">
-      <div class="m-leftname">ID：滴漏式咖啡机</div>
-    <div class="m-rightzan">
-      <a class="z-zan"></a>
-      <div class="m-nubmer">51</div>
-      </div>
-      </div>
-      </li>*/
-
+    var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
-      var ord=data[i];
-      var img=$('<a class="m-imgbox"><img src="'+ord.showPics.split(',')[0]+'"/></a>');
-      var name=$('<div class="m-leftname">ID：'+ord.productID+'</div>');
-      var zan =$('<a class="z-zan"></a>');
-      //var zanNum=$('<div class="m-nubmer">'+ord.+'</div>');
+      var ord = data[i];
+      var img = $('<a class="m-imgbox"><img src="' + ord.showPics.split(',')[0] + '"/></a>');
+      var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
+      var zan = $('<a class="z-zan" data-showOrderId="' + ord.idsUserId + '"></a>');
+      var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
+      var zanPar = $('<div class="m-rightzan"></div>');
+      zanPar.append(zan);
+      zanPar.append(zanNum);
+      var content = $('<div class="m-contbox"></div>');
+      content.append(name);
+      content.append(zanPar);
+      var li = $('<li></li>');
+      li.append(img);
+      li.append(content);
+      ul.append(li);
     }
+    return ul;
   };
+
+  function clickZan(e){
+    /*点赞事件*/
+    var tg = e.target;
+    var $tg = $(tg);
+    if(!$tg.hasClass('z-zan')){
+      return;
+    }
+    var url = urlObj.saveAssist;
+    var params = {
+      showOrderId: $tg.attr('data-showOrderId')
+    };
+    Common.sendFormData(url, function(data){
+      if(data.isSuccess){
+        var $zanNum = $($tg.siblings('.m-nubmer'));
+        var num = $zanNum.html() * 1;
+        $zanNum.html(++num);
+      }else{
+        alert(data.resultMsg);
+      }
+    }, params);
+  }
+
+  function bindLis(){
+    $('#scrollDiv').off('click');
+    $('#scrollDiv').on('click', clickZan);
+  }
+
+  (function init(){
+    /*初始化页面*/
+    bindLis();//绑定事件
+    showOrderObj.showOrderList();//查询列表页
+
+  })();
 })();
