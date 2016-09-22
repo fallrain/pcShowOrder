@@ -301,7 +301,6 @@
       return;
     }
     var ordSlt = $('#js-name');
-    var li = '<li data-productID="' + ord.goods_id + '" data-orderId="' + ord.order_id + '" data-productDesc="' + ord.showContent + '">';
     var productID = ordSlt.attr('data-productID');
     var productDesc = ordSlt.attr('sata-productDesc');
     var orderId = ordSlt.attr('data-orderId');
