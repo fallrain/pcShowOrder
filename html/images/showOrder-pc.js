@@ -204,7 +204,7 @@
               return;
             }
             $('#upImg' + btnIdNum).css('display', 'block');
-            smtImgsAy.push(data);
+            smtImgsAy.push(picSrc);
           }else{
             alert(data.resultMsg);
           }
