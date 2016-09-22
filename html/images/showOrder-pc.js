@@ -254,6 +254,7 @@
         var $zanNum = $($tg.siblings('.m-nubmer'));
         var num = $zanNum.html() * 1;
         $zanNum.html(++num);
+        $tg.addClass('z-crt');
       }else{
         $tg.prop('disabled', false);
         alert(data.resultMsg);
