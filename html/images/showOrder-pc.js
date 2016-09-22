@@ -374,7 +374,7 @@
     showOrderObj.showOrderList();
   }
 
-  function myOrdClickZan(e){
+  function myOrdClickZan(){
     /*点赞事件*/
     var $this = $(this);
     $this.prop('disabled', true);
