@@ -470,9 +470,10 @@ $(function(){
     var s_title_2 = $("#js-name");
     s_title_2.text(s_text).removeClass("span_aa");
     var ordId = $this.attr('data-orderId');
-    s_title_2.attr('data-orderId', $this.attr('data-id'));
+    s_title_2.attr('data-id', $this.attr('data-id'));
     s_title_2.attr('data-orderId', ordId);
     s_title_2.attr('data-productID', $this.attr('data-productID'));
+    s_title_2.attr('data-productDesc', $this.attr('data-productDesc'));
     $('#saveOrdFromOrdNum').html(ordId);
     $('.div_scroll').hide();
   });
