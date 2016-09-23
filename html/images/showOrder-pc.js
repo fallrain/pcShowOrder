@@ -42,7 +42,7 @@
       }, options));
     },
   };
-  var urlHead = 'http://123.103.113.66';//url头部
+  var urlHead = 'http://eShop.haier.com';//url头部
   var urlObj = {
     isShowOrder: urlHead + '/showorder/isShowOrder',//判断用户是否晒单服务
     showOrderList: urlHead + '/showorder/showOrderList',//晒单活动列表页服务
