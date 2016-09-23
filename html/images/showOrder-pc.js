@@ -71,24 +71,24 @@
     gotoLogin();
   }
 
-  //判断登录状态
-  jQuery.ajax({
-    type: "post",
-    dataType: "json",
-    async: false,
-    url: "/HaierFramework/myhaier/checkedCurUserIsThird.do",
-    success: function(jsonResult){
-      if(!jsonResult.isSuccess){
-      }else{
-        //如果是1  第三方登录显示  2卡萨帝用户  3普通用户
-        if(jsonResult.oauthType != "haierCounts"){
-          alert("请使用海尔账号用户注册产品!");
-          window.location.href = "/cn/usercenter/product/my_product.shtml";
-          return false;
-        }
-      }
-    }
-  });
+  /*  //判断登录状态
+   jQuery.ajax({
+   type: "post",
+   dataType: "json",
+   async: false,
+   url: "/HaierFramework/myhaier/checkedCurUserIsThird.do",
+   success: function(jsonResult){
+   if(!jsonResult.isSuccess){
+   }else{
+   //如果是1  第三方登录显示  2卡萨帝用户  3普通用户
+   if(jsonResult.oauthType != "haierCounts"){
+   alert("请使用海尔账号用户注册产品!");
+   window.location.href = "/cn/usercenter/product/my_product.shtml";
+   return false;
+   }
+   }
+   }
+   });*/
   /*判断登录区域End*/
   var showOrderObj = {
     currentPage: 1
