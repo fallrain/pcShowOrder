@@ -50,7 +50,46 @@
     saveAssist: urlHead + '/showorder/saveAssist',//晒单点赞服务
     showOrderPicUpload: urlHead + '/showorder/showOrderList',//上传图片保存
   };
+  /*判断登录区域*/
+  //判断当前是否存在同域Cookie
+  function istrsidssdssotoken(){
+    var trsidssdssotoken = "trsidssdssotoken";//同域Cookie
+    var sdssotoken = jQuery.cookie(trsidssdssotoken);
+    if(sdssotoken != null && sdssotoken != ''){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
+  var gotoLogin = function(){
+    var returnUrl = window.location.href;
+    location.href = "http://user.haier.com/ids/cn/haier_login.jsp?returnUrl=" + returnUrl;
+  };
+
+  if(!istrsidssdssotoken()){//cookie 中的是否登录
+    gotoLogin();
+  }
+
+  //判断登录状态
+  jQuery.ajax({
+    type: "post",
+    dataType: "json",
+    async: false,
+    url: "/HaierFramework/myhaier/checkedCurUserIsThird.do",
+    success: function(jsonResult){
+      if(!jsonResult.isSuccess){
+      }else{
+        //如果是1  第三方登录显示  2卡萨帝用户  3普通用户
+        if(jsonResult.oauthType != "haierCounts"){
+          alert("请使用海尔账号用户注册产品!");
+          window.location.href = "/cn/usercenter/product/my_product.shtml";
+          return false;
+        }
+      }
+    }
+  });
+  /*判断登录区域End*/
   var showOrderObj = {
     currentPage: 1
   };
