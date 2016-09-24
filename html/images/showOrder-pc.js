@@ -177,21 +177,46 @@
     $('#js-sd').removeClass("z-blo");
     $('#js-nosd').addClass("z-blo");
     var ordList = data.data.orderList;
+   /* var ordList = [
+      {
+        "ORDER_ID": "20150101140105102967",
+        "GOODS_ID": "1372",
+        "GOODS_NAME": "雷神T2 超薄聚合物移动电源10000毫安"
+      }
+    ];*/
     //<li>小厨师 空气炸锅 AF-F001</li>
     var ordListLen = ordList.length;
     var liAy = [];
     for(var i = 0; i < ordListLen; i++){
       var ord = ordList[i];
-      var li = '<li data-productID="' + ord.GOODS_ID + '" data-orderId="' + ord.ORDER_ID + '" data-productDesc="' + ord.GOODS_NAME + '">';
+      var li = '<li data-id="' + ord.id + '" data-productID="' + ord.GOODS_ID + '" data-orderId="' + ord.ORDER_ID + '" data-productDesc="' + ord.GOODS_NAME + '">';
       li += ord.GOODS_NAME + '</li>';
       liAy.push(li);
     }
     $('#beShowOrd').html(liAy.join(''));
+
+    var s_select = $(".select_box li");
+    s_select.off('click', sltOpt);
+    s_select.click(sltOpt);
+  }
+
+  function sltOpt(){
+    var $this = $(this);
+    var s_text = $(this).text();
+    var s_title_2 = $("#js-name");
+    s_title_2.text(s_text).removeClass("span_aa");
+    var ordId = $this.attr('data-orderId');
+    s_title_2.attr('data-orderId', ordId);
+    s_title_2.attr('data-productID', $this.attr('data-productID'));
+    s_title_2.attr('data-productDesc', $this.attr('data-productDesc'));
+    $('#saveOrdFromOrdNum').html(ordId);
+    $('.div_scroll').hide();
   }
 
   function showOederCheck(){
     /*判断是否晒单来判断*/
     var beShowurl = urlObj.isShowOrder;
+    //toShowOrder();
     Common.sendFormData(beShowurl, function(data){
       if(data.isSuccess){
         var isshow = data.data.isshow;
@@ -342,12 +367,14 @@
       return;
     }
     var ordSlt = $('#js-name');
+    var id = ordSlt.attr('data-id');
     var productID = ordSlt.attr('data-productID');
     var productDesc = ordSlt.attr('sata-productDesc');
     var orderId = ordSlt.attr('data-orderId');
     var showContent = $('#showContent').val();
     var showPics = smtImgsAy.join(',');
     var params = {
+      id: id,
       productID: productID,
       productDesc: productDesc,
       orderId: orderId,
