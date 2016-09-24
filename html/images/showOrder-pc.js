@@ -331,11 +331,11 @@
   function checkNumOfContent(str){
     /*检查字数*/
     var len = str.split('').length;
-    if(len > 10 && len <= 100){
-      $('#showContentTip').html('输入晒单文字不得少于10个字多于100个字');
+    if(len > 50 && len <= 100){
+      $('#showContentTip').html('输入晒单文字不得少于50个字多于100个字');
       return true;
     }
-    $('#showContentTip').html('输入错误！输入晒单文字不得少于10个字多于100个字');
+    $('#showContentTip').html('输入错误！输入晒单文字不得少于50个字多于100个字');
   }
 
   function checkShowOrdForm(){

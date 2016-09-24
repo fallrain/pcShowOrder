@@ -770,7 +770,7 @@ figure {
 
 .m-tcbox .m-leftcont .m-name {
   width: 100%;
-  text-align: right;
+  text-align: left;
   display: inline-block;
   font-size: #18px;
   color: #ededed;
