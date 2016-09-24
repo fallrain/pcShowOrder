@@ -108,6 +108,7 @@
           showOrderObj.currentPage--;
           return;
         }
+        $('#entityCount').html(data.data.entityCount);
         var orderListHtml = genOrderListHtml(data.data.resultList);
         var orderListPar = $('#scrollDiv');
         //添加进去
@@ -126,7 +127,7 @@
     var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
       var ord = data[i];
-      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + urlHead + 'files' + ord.showPics.split(',')[0] + '"/></a>');
+      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + '/files' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
       var zan = $('<a class="z-zan" data-showOrderId="' + ord.id + '"></a>');
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
@@ -163,7 +164,7 @@
     var showPics = order.showPics.split(',');
     var picLen = showPics.length;
     for(var i = 0; i < picLen; i++){
-      var pic = urlHead + 'files' + showPics[i];
+      var pic = '/files' + showPics[i];
       var img = $('<img src="' + pic + '"/>');
       var imgPar = $('<div class="m-listimg"></div>');
       imgPar.append(img);
@@ -414,7 +415,7 @@
     var smPicLiAy = [];
     for(var i = 0; i < picsLen; i++){
       var pic = showPicsAy[i];
-      var picSrc = urlHead + pic;
+      var picSrc = '/files' + pic;
       bigPicLiAy.push('<li class="silder_panel clearfix"><a href="#"><img src="' + picSrc + '"/></a></li>');
       smPicLiAy.push('<li><a href="#"><i></i><img src="' + picSrc + '"/></a></li>');
     }
@@ -430,7 +431,7 @@
   function jumpPage(){
     /*翻页*/
     var $this = $(this);
-    var type = $this.attr('data-jumps');
+    var type = $this.attr('data-jump');
     if(type == 'pre'){
       if(--showOrderObj.currentPage < 0){
         showOrderObj.currentPage = 1;
