@@ -128,7 +128,7 @@
     for(var i = 0; i < len; i++){
       var ord = data[i];
       var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img class="img100per" src="' + '/files' + ord.showPics.split(',')[0] + '"/></a>');
-      var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
+      var name = $('<div class="m-leftname">ID：' + ord.idsUserName + '</div>');
       var zan = '';
       if(ord.assistId > 0){
         zan = $('<a class="z-zan z-crt" disabled data-showOrderId="' + ord.id + '"></a>');
