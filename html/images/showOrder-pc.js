@@ -129,7 +129,13 @@
       var ord = data[i];
       var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img class="img100per" src="' + '/files' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
-      var zan = $('<a class="z-zan" data-showOrderId="' + ord.id + '"></a>');
+      var zan = '';
+      if(ord.assistId > 0){
+        zan = $('<a class="z-zan z-crt" disabled data-showOrderId="' + ord.id + '"></a>');
+      }else{
+        zan = $('<a class="z-zan" data-showOrderId="' + ord.id + '"></a>');
+      }
+
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
       var zanPar = $('<div class="m-rightzan"></div>');
       zanPar.append(zan);
@@ -403,6 +409,14 @@
 
     var num = $this.attr('data-index');
     var ordData = showOrderObj.ordsData[num];
+    if(ordData.assistId > 0){
+      $('.z-rightzanbox').prop('disabled', true);
+      $('.z-rightzanbox').addClass('z-crt');
+    }else{
+      //去掉点赞的样式
+      $('.z-rightzanbox').prop('disabled', false);
+      $('.z-rightzanbox').removeClass('z-crt');
+    }
     showOrderObj.curMyOrdData = ordData;
     var showPicsAy = ordData.showPics.split(',');
     var picsLen = showPicsAy.length;
