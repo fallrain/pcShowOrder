@@ -108,7 +108,7 @@
           showOrderObj.currentPage--;
           return;
         }
-        $('#entityCount').html(data.data.entityCount);
+        $('#entityCount').html(data.data.entityCount || 0);
         var orderListHtml = genOrderListHtml(data.data.resultList);
         var orderListPar = $('#scrollDiv');
         //添加进去
