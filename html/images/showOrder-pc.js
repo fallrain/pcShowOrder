@@ -126,9 +126,9 @@
     var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
       var ord = data[i];
-      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + urlHead + '/file' + ord.showPics.split(',')[0] + '"/></a>');
+      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
-      var zan = $('<a class="z-zan" data-showOrderId="' + ord.idsUserId + '"></a>');
+      var zan = $('<a class="z-zan" data-showOrderId="' + ord.id + '"></a>');
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
       var zanPar = $('<div class="m-rightzan"></div>');
       zanPar.append(zan);
@@ -163,7 +163,7 @@
     var showPics = order.showPics.split(',');
     var picLen = showPics.length;
     for(var i = 0; i < picLen; i++){
-      var pic = urlHead + '/file' + showPics[i];
+      var pic = showPics[i];
       var img = $('<img src="' + pic + '"/>');
       var imgPar = $('<div class="m-listimg"></div>');
       imgPar.append(img);

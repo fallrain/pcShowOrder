@@ -141,12 +141,12 @@
             <div class="m-icobox"><img src="images/img-success.png" alt=""/></div>
             <div class="m-sdtxtbox">晒单提交成功</div>
             <div class="m-btnarea">
-              <a href="javascript:;" class="z-btn js-close">取消</a>
-              <a href="javascript:;" class="z-btn js-close">确认</a>
+              <a href="javascript:;" class="z-btn js-reload">取消</a>
+              <a href="javascript:;" class="z-btn js-reload">确认</a>
             </div>
 
           </div>
-          <a class="z-succlo"></a>
+          <a class="z-succlo js-reload"></a>
         </div>
       </div>
 
@@ -157,12 +157,12 @@
             <div class="m-icobox"><img src="images/img-fail.png" alt=""/></div>
             <div class="m-sdtxtbox">晒单提交失败</div>
             <div class="m-btnarea">
-              <a href="javascript:;" class="z-btn js-close">取消</a>
-              <a href="javascript:;" class="z-btn">重新填写</a>
+              <a href="javascript:;" class="z-btn js-closeSelf">取消</a>
+              <a href="javascript:;" class="z-btn js-reload">重新填写</a>
             </div>
 
           </div>
-          <a class="z-failclo"></a>
+          <a class="z-failclo js-closeSelf"></a>
         </div>
       </div>
     </div>
@@ -424,21 +424,14 @@
 <script type="text/javascript">
   $('#js-closefc').click(function(){
     $(this).parent().removeClass("z-blo");
-  })
-
-  $('.z-succlo').click(function(){
-    $(this).parent().parent().removeClass("z-blo");
-    //直接刷新本页
-    //location.reload();
-  })
-  $('.z-failclo').click(function(){
-    $(this).parent().parent().removeClass("z-blo");
-  })
-  $('.m-btnarea .js-close').click(function(){
-    $(this).parent().parent().parent().parent().removeClass("z-blo");
-    //直接刷新本页
-    //location.reload();
-  })
+  });
+  
+  $('.js-reload').click(function(){
+    location.reload();
+  });
+  $('.js-closeSelf').click(function(){
+    $(this).closest('.m-tcbox').css('display', 'none');
+  });
 </script>
 <script type="text/javascript">//select下拉框js
 $(function(){
