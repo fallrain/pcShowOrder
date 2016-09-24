@@ -264,7 +264,8 @@
         },
         // 上传完成事件
         onComplete: function(name, data){
-          if(data && data != '上传图片失败'){
+
+          if(new Object().toString.call(data) == '[object String]'){
             var picSrc = data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
@@ -279,7 +280,7 @@
             $('#upImg' + btnIdNum).css('display', 'block');
             smtImgsAy.push(picSrc);
           }else{
-            alert(data);
+            alert(data.resultMsg);
           }
         },
         // 系统信息显示（例如后缀名不合法）
