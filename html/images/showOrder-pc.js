@@ -44,11 +44,11 @@
   };
   var urlHead = 'http://eShop.haier.com';//url头部
   var urlObj = {
-    isShowOrder: urlHead + '/showorder/isShowOrder',//判断用户是否晒单服务
-    showOrderList: urlHead + '/showorder/showOrderList',//晒单活动列表页服务
-    saveShowOrder: urlHead + '/showorder/saveShowOrder',//晒单保存服务
-    saveAssist: urlHead + '/showorder/saveAssist',//晒单点赞服务
-    showOrderPicUpload: urlHead + '/showorder/showOrderList',//上传图片保存
+    isShowOrder: '/showorder/isShowOrder',//判断用户是否晒单服务
+    showOrderList: '/showorder/showOrderList',//晒单活动列表页服务
+    saveShowOrder: '/showorder/saveShowOrder',//晒单保存服务
+    saveAssist: '/showorder/saveAssist',//晒单点赞服务
+    showOrderPicUpload: '/showorder/showOrderList',//上传图片保存
   };
   /*判断登录区域*/
   //判断当前是否存在同域Cookie
@@ -126,7 +126,7 @@
     var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
       var ord = data[i];
-      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + ord.showPics.split(',')[0] + '"/></a>');
+      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + urlHead + 'files' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
       var zan = $('<a class="z-zan" data-showOrderId="' + ord.id + '"></a>');
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
@@ -163,7 +163,7 @@
     var showPics = order.showPics.split(',');
     var picLen = showPics.length;
     for(var i = 0; i < picLen; i++){
-      var pic = showPics[i];
+      var pic = urlHead + 'files' + showPics[i];
       var img = $('<img src="' + pic + '"/>');
       var imgPar = $('<div class="m-listimg"></div>');
       imgPar.append(img);
@@ -250,14 +250,14 @@
     for(var i = 0; i < 5; i++){
       $.jUploader({
         button: 'upImg' + i, // 这里设置按钮id
-        action: urlHead + '/showorder/showOrderPicUpload',
+        action: '/showorder/showOrderPicUpload',
         // 开始上传事件
         onUpload: function(data){
         },
         // 上传完成事件
         onComplete: function(name, data){
           if(data.isSuccess){
-            var picSrc = urlHead + '/file' + data.data; //获取图片路径
+            var picSrc = data.data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
             img.prop('src', picSrc);
@@ -432,7 +432,7 @@
     var $this = $(this);
     var type = $this.attr('data-jumps');
     if(type == 'pre'){
-      if(--showOrderObj.currentPage < 1){
+      if(--showOrderObj.currentPage < 0){
         showOrderObj.currentPage = 1;
       }
     }else{
@@ -447,7 +447,7 @@
     $this.prop('disabled', true);
     var url = urlObj.saveAssist;
     var params = {
-      showOrderId: showOrderObj.curMyOrdData.idsUserId
+      showOrderId: showOrderObj.curMyOrdData.id
     };
     Common.sendFormData(url, function(data){
       if(data.isSuccess){
