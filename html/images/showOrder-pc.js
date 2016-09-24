@@ -174,8 +174,9 @@
       var img = $('<img class="img100per" src="' + pic + '"/>');
       var imgPar = $('<div class="m-listimg"></div>');
       imgPar.append(img);
+      showOrderImgPar.html(imgPar);
     }
-    showOrderImgPar.html(imgPar);
+
   }
 
   function toShowOrder(data){
@@ -272,7 +273,7 @@
             img.css('display', 'block');
             var btnId = btn.prop('id');
             var btnIdNum = btnId.substr(btnId.length - 1) * 1 + 1;
-            if(btnIdNum > 4){
+            if(btnIdNum > 5){
               return;
             }
             $('#upImg' + btnIdNum).css('display', 'block');
