@@ -127,7 +127,7 @@
     var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
       var ord = data[i];
-      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + '/files' + ord.showPics.split(',')[0] + '"/></a>');
+      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img class="img100per" src="' + '/files' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
       var zan = $('<a class="z-zan" data-showOrderId="' + ord.id + '"></a>');
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
@@ -165,7 +165,7 @@
     var picLen = showPics.length;
     for(var i = 0; i < picLen; i++){
       var pic = '/files' + showPics[i];
-      var img = $('<img src="' + pic + '"/>');
+      var img = $('<img class="img100per" src="' + pic + '"/>');
       var imgPar = $('<div class="m-listimg"></div>');
       imgPar.append(img);
     }
@@ -258,7 +258,7 @@
         // 上传完成事件
         onComplete: function(name, data){
           if(data.isSuccess){
-            var picSrc = '/files' + data.data; //获取图片路径
+            var picSrc = data.data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
             img.prop('src', picSrc);
