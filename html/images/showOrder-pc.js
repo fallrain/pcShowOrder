@@ -263,8 +263,8 @@
         },
         // 上传完成事件
         onComplete: function(name, data){
-          if(data.isSuccess){
-            var picSrc = data.data; //获取图片路径
+          if(data && data != '上传图片失败'){
+            var picSrc = data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
             img.prop('src', '/files' + picSrc);
@@ -278,7 +278,7 @@
             $('#upImg' + btnIdNum).css('display', 'block');
             smtImgsAy.push(picSrc);
           }else{
-            alert(data.resultMsg);
+            alert(data);
           }
         },
         // 系统信息显示（例如后缀名不合法）
