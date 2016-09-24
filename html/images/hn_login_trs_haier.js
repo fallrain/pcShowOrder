@@ -50,31 +50,3 @@ function setcookie(cookieName, cookieValue, seconds, path, domain, secure){
     + (domain ? '; domain=' + domain : '')
     + (secure ? '; secure' : '');
 }
-/*
-//截取字符串，长度为字符为单位
-function subHZString(str, len, hasDot){
-  var newLength = 0;
-  var newStr = '';
-  var chineseRegex = /[^\x00-\xff]/g;
-  var singleChar = '';
-  var strLength = str.replace(chineseRegex, '**').length;
-  for(var i = 0; i < strLength; i++){
-    singleChar = str.charAt(i).toString();
-    if(singleChar.match(chineseRegex) != null){
-      newLength += 2;
-    }
-    else{
-      newLength++;
-    }
-    if(newLength > len){
-      break;
-    }
-    newStr += singleChar;
-  }
-
-  if(strLength > len){
-    newStr += hasDot;
-  }
-  return newStr;
-}
-*/
