@@ -64,7 +64,8 @@
 
   var gotoLogin = function(){
     var returnUrl = window.location.href;
-    location.href = "http://user.haier.com/ids/cn/haier_login.jsp?returnUrl=" + returnUrl;
+    location.href = "http://testuser.haier.com/ids/cn/haier_login.jsp?returnUrl=" + returnUrl;
+    //location.href = "http://user.haier.com/ids/cn/haier_login.jsp?returnUrl=" + returnUrl;
   };
 
   if(!istrsidssdssotoken()){//cookie 中的是否登录
@@ -114,7 +115,7 @@
         $('.js-m-imgbox').off('click', showMyOrder)
         $('.js-m-imgbox').click(showMyOrder)
       }else{
-        alert(data.resultMsg);
+        //alert(data.resultMsg);
       }
     }, params);
   };
@@ -194,9 +195,8 @@
       if(data.isSuccess){
         var isshow = data.data.isshow;
         if(isshow == 0){//有数据
-          $('#js-nosdt').addClass("z-blo");
-        }
-        if(isshow == 1){
+          toShowOrder();
+        }else if(isshow == 1){
           fillInMyOrd(data);
         }
       }
