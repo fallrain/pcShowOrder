@@ -267,7 +267,7 @@
             var picSrc = data.data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
-            img.prop('src', picSrc);
+            img.prop('src', '/files' + picSrc);
             btn.css('display', 'none');
             img.css('display', 'block');
             var btnId = btn.prop('id');
