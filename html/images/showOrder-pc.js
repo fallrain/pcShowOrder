@@ -126,7 +126,7 @@
     var ul = $('<ul></ul>');
     for(var i = 0; i < len; i++){
       var ord = data[i];
-      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + ord.showPics.split(',')[0] + '"/></a>');
+      var img = $('<a class="js-m-imgbox m-imgbox" data-index="' + i + '"><img src="' + urlHead + '/file' + ord.showPics.split(',')[0] + '"/></a>');
       var name = $('<div class="m-leftname">ID：' + ord.productID + '</div>');
       var zan = $('<a class="z-zan" data-showOrderId="' + ord.idsUserId + '"></a>');
       var zanNum = $('<div class="m-nubmer">' + ord.assistcount + '</div>');
@@ -163,7 +163,7 @@
     var showPics = order.showPics.split(',');
     var picLen = showPics.length;
     for(var i = 0; i < picLen; i++){
-      var pic = showPics[i];
+      var pic = urlHead + '/file' + showPics[i];
       var img = $('<img src="' + pic + '"/>');
       var imgPar = $('<div class="m-listimg"></div>');
       imgPar.append(img);
@@ -177,13 +177,13 @@
     $('#js-sd').removeClass("z-blo");
     $('#js-nosd').addClass("z-blo");
     var ordList = data.data.orderList;
-   /* var ordList = [
-      {
-        "ORDER_ID": "20150101140105102967",
-        "GOODS_ID": "1372",
-        "GOODS_NAME": "雷神T2 超薄聚合物移动电源10000毫安"
-      }
-    ];*/
+    /* var ordList = [
+     {
+     "ORDER_ID": "20150101140105102967",
+     "GOODS_ID": "1372",
+     "GOODS_NAME": "雷神T2 超薄聚合物移动电源10000毫安"
+     }
+     ];*/
     //<li>小厨师 空气炸锅 AF-F001</li>
     var ordListLen = ordList.length;
     var liAy = [];
@@ -257,7 +257,7 @@
         // 上传完成事件
         onComplete: function(name, data){
           if(data.isSuccess){
-            var picSrc = urlHead + data.data; //获取图片路径
+            var picSrc = urlHead + '/file' + data.data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
             img.prop('src', picSrc);
@@ -369,7 +369,7 @@
     var ordSlt = $('#js-name');
     var id = ordSlt.attr('data-id');
     var productID = ordSlt.attr('data-productID');
-    var productDesc = ordSlt.attr('sata-productDesc');
+    var productDesc = ordSlt.attr('data-productDesc');
     var orderId = ordSlt.attr('data-orderId');
     var showContent = $('#showContent').val();
     var showPics = smtImgsAy.join(',');
