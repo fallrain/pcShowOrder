@@ -258,7 +258,7 @@
         // 上传完成事件
         onComplete: function(name, data){
           if(data.isSuccess){
-            var picSrc = data.data; //获取图片路径
+            var picSrc = '/files' + data.data; //获取图片路径
             var btn = this.button;
             var img = btn.siblings('img');
             img.prop('src', picSrc);
@@ -404,11 +404,6 @@
     var num = $this.attr('data-index');
     var ordData = showOrderObj.ordsData[num];
     showOrderObj.curMyOrdData = ordData;
-    //slider_cont 大图 <li class="silder_panel clearfix"><a href="#"><img src="images/2012101623050497.jpg"/></a></li>
-    //smImg 小缩略图 <li><a href="#"><i></i><img src="images/img-xcsl01.jpg"/></a></li>
-    //myOrdId ID
-    //myOrdDec 晒单内容
-    //myOrdPrdDec 商品说明
     var showPicsAy = ordData.showPics.split(',');
     var picsLen = showPicsAy.length;
     var bigPicLiAy = [];
@@ -424,7 +419,7 @@
     $('#myOrdId').html(ordData.productID);//产品ID
     $('#myOrdDec').html(ordData.showContent);
     $('#myOrdPrdDec').html(ordData.productDesc);
-
+    lunbo();
     $("#js-tc").addClass("z-blo");//显示弹层
   }
 
