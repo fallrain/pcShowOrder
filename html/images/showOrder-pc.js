@@ -173,6 +173,7 @@
 
   function toShowOrder(data){
     /*填写信息晒单*/
+
     $('#js-sd').removeClass("z-blo");
     $('#js-nosd').addClass("z-blo");
     var ordList = data.data.orderList;
@@ -181,7 +182,7 @@
     var liAy = [];
     for(var i = 0; i < ordListLen; i++){
       var ord = ordList[i];
-      var li = '<li data-id="' + ord.id + '" data-productID="' + ord.goods_id + '" data-orderId="' + ord.order_id + '" data-productDesc="' + ord.GOODS_NAME + '">';
+      var li = '<li data-productID="' + ord.GOODS_ID + '" data-orderId="' + ord.ORDER_ID + '" data-productDesc="' + ord.GOODS_NAME + '">';
       li += ord.GOODS_NAME + '</li>';
       liAy.push(li);
     }
@@ -341,14 +342,12 @@
       return;
     }
     var ordSlt = $('#js-name');
-    var id = ordSlt.attr('data-id');
     var productID = ordSlt.attr('data-productID');
     var productDesc = ordSlt.attr('sata-productDesc');
     var orderId = ordSlt.attr('data-orderId');
     var showContent = $('#showContent').val();
     var showPics = smtImgsAy.join(',');
     var params = {
-      id: id,
       productID: productID,
       productDesc: productDesc,
       orderId: orderId,
